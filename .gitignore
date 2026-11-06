@@ -1,0 +1,18 @@
+# React / Node (frontend)
+gestion-cours-frontend/node_modules/
+gestion-cours-frontend/build/
+gestion-cours-frontend/dist/
+gestion-cours-frontend/.env
+
+# Spring Boot / Maven (backend)
+gestion-cours/target/
+gestion-cours/.mvn/
+gestion-cours/*.log
+gestion-cours/.env
+gestion-cours/src/main/resources/application.properties
+
+# IDE
+.idea/
+.vscode/
+*.iml
+.DS_Store

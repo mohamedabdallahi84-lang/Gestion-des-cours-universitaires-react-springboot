@@ -1,0 +1,86 @@
+:root {
+  --primary: #2d5d8b;
+  --primary-dark: #1f4263;
+  --bg: #f4f6f9;
+  --border: #dde1e6;
+  --text: #232730;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.app { min-height: 100vh; }
+
+.page {
+  max-width: 1000px;
+  margin: 24px auto;
+  padding: 24px 28px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+h1 { font-size: 1.5rem; margin-top: 0; color: var(--primary-dark); }
+h2 { font-size: 1.15rem; color: var(--primary-dark); margin-top: 28px; }
+
+a { color: var(--primary); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+nav {
+  background: var(--primary);
+  padding: 12px 20px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+}
+nav a { color: white; margin-right: 4px; }
+nav button { margin-left: 8px; }
+
+label {
+  display: block;
+  margin-bottom: 4px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+input, select {
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-size: 0.95rem;
+  margin-top: 4px;
+  min-width: 220px;
+}
+
+button {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin-top: 6px;
+}
+button:hover { background: var(--primary-dark); }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+  background: white;
+}
+th, td {
+  border: 1px solid var(--border);
+  padding: 8px 12px;
+  text-align: left;
+  font-size: 0.9rem;
+}
+th { background: #eef1f5; }
+
+form { margin-top: 10px; }
