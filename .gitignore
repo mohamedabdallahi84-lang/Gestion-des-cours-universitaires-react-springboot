@@ -6,7 +6,6 @@ gestion-cours-frontend/.env
 
 # Spring Boot / Maven (backend)
 gestion-cours/target/
-gestion-cours/.mvn/
 gestion-cours/*.log
 gestion-cours/.env
 gestion-cours/src/main/resources/application.properties
