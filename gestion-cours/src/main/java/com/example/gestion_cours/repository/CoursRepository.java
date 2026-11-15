@@ -1,5 +1,5 @@
 package com.example.gestion_cours.repository;
-
+import java.time.LocalDate;
 
 import com.example.gestion_cours.entity.Cours;
 import com.example.gestion_cours.entity.Groupe;
@@ -33,4 +33,8 @@ public interface CoursRepository extends JpaRepository<Cours, Long> {
     // Spring Data JPA comprend "Enseignant_Telephone" comme "le champ telephone
 // de l'enseignant lié à ce cours", grâce au underscore qui sépare la relation du champ.
     List<Cours> findByEnseignant_Telephone(String telephone);
+    
+    List<Cours> findByGroupeAndDate(Groupe groupe, LocalDate date);
+
+    List<Cours> findByEnseignantAndDate(Enseignant enseignant, LocalDate date);
 }

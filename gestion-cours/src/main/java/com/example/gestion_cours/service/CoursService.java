@@ -66,9 +66,7 @@ public class CoursService {
         if (cours.getDate() == null) {
             throw new RuntimeException("La date est obligatoire");
         }
-        if (cours.getDate().isBefore(LocalDate.now())) {
-            throw new RuntimeException("La date ne peut pas être dans le passé : " + cours.getDate());
-        }
+        
         if (cours.getDate().getDayOfWeek() == DayOfWeek.SUNDAY) {
             throw new RuntimeException("La date ne peut pas être un dimanche : " + cours.getDate());
         }
@@ -93,10 +91,11 @@ public class CoursService {
     }
 
     private void verifierConflitHoraire(Cours cours, Long idActuel) {
-        if (cours.getGroupe() == null || cours.getJour() == null || cours.getHoraire() == null) return;
-        List<Cours> coursDuGroupeCeJour = coursRepository.findByGroupeAndJour(cours.getGroupe(), cours.getJour());
+              if (cours.getGroupe() == null || cours.getDate() == null || cours.getHoraire() == null) return;
+        List<Cours> coursDuGroupeCeJour = coursRepository.findByGroupeAndDate(cours.getGroupe(), cours.getDate());
         boolean conflit = coursDuGroupeCeJour.stream()
                 .filter(c -> !c.getId().equals(idActuel))
+                 .filter(c -> c.getStatut() != StatutCours.REFUSE)
                 .anyMatch(c -> horairesSeChevauchent(c.getHoraire(), cours.getHoraire()));
         if (conflit) {
             throw new RuntimeException("Ce groupe a déjà un cours le " + cours.getJour()
@@ -105,10 +104,11 @@ public class CoursService {
     }
 
     private void verifierConflitEnseignant(Cours cours, Long idActuel) {
-        if (cours.getEnseignant() == null || cours.getJour() == null || cours.getHoraire() == null) return;
-        List<Cours> coursDeLEnseignantCeJour = coursRepository.findByEnseignantAndJour(cours.getEnseignant(), cours.getJour());
+              if (cours.getEnseignant() == null || cours.getDate() == null || cours.getHoraire() == null) return;
+        List<Cours> coursDeLEnseignantCeJour = coursRepository.findByEnseignantAndDate(cours.getEnseignant(), cours.getDate());
         boolean conflit = coursDeLEnseignantCeJour.stream()
                 .filter(c -> !c.getId().equals(idActuel))
+                 .filter(c -> c.getStatut() != StatutCours.REFUSE)
                 .anyMatch(c -> horairesSeChevauchent(c.getHoraire(), cours.getHoraire()));
         if (conflit) {
             throw new RuntimeException("L'enseignant " + cours.getEnseignant().getNom() + " a déjà un cours le "
@@ -135,6 +135,9 @@ public class CoursService {
 
     public Cours createCours(Cours cours) {
         validerCours(cours);
+        if (cours.getDate().isBefore(LocalDate.now())) {
+            throw new RuntimeException("La date ne peut pas être dans le passé : " + cours.getDate());
+        }
         verifierConflitHoraire(cours, null);
         verifierConflitEnseignant(cours, null);
         cours.setStatut(StatutCours.EN_ATTENTE);
