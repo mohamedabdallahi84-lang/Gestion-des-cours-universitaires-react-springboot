@@ -1,13 +1,13 @@
-import axios from 'axios'
+import api from './api'
 
-const API_URL = 'http://localhost:8080/api/enseignants'
+const BASE = '/api/enseignants'
 
 const enseignantService = {
-  getAll: () => axios.get(API_URL),
-  create: (enseignant) => axios.post(API_URL, enseignant),
-  getByTelephone: (telephone) => axios.get(`${API_URL}/${telephone}`),
-  update: (telephone, enseignant) => axios.put(`${API_URL}/${telephone}`, enseignant),
-  remove: (telephone) => axios.delete(`${API_URL}/${telephone}`),
+  getAll: () => api.get(BASE),
+  create: (enseignant) => api.post(BASE, enseignant),
+  getByTelephone: (telephone) => api.get(`${BASE}/${telephone}`),
+  update: (telephone, enseignant) => api.put(`${BASE}/${telephone}`, enseignant),
+  remove: (telephone) => api.delete(`${BASE}/${telephone}`),
 }
 
 export default enseignantService

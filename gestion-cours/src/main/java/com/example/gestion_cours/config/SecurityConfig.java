@@ -49,9 +49,9 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .requestMatchers("/api/auth/**", "/api/public/**").permitAll()
-                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                                              .requestMatchers("/api/admin/**", "/api/cours/**", "/api/enseignants/**").hasRole("ADMIN")
                         .requestMatchers("/api/professeur/**").hasRole("PROFESSEUR")
-                        .anyRequest().permitAll()
+                        .anyRequest().authenticated()
                 )
                 .addFilterBefore(filtreAuthentification, UsernamePasswordAuthenticationFilter.class);
 
